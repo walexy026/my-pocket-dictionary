@@ -5,15 +5,45 @@ import { FiVolume2 } from "react-icons/fi";
 
 const synth = window.speechSynthesis;
 const Dico = () => {
-  console.log(synth.getVoices());
+  // console.log(synth.getVoices());
 
   const voices = useMemo(() => synth.getVoices(), []);
   const [voiceSelected, setVoiceSelected] = useState("Google UK English Male");
+  const [text, setText] = useState("");
+  const [isSpeaking, setIsSpeaking] = useState(" ");
+
+  // const handleIcon = () => {};
+  const startSpeech = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    synth.speak(utterance);
+  };
+
+  const handleSpeech = () => {
+    if (!text.trim()) return;
+    if (!synth.speaking) {
+      startSpeech(text);
+      setIsSpeaking("speak");
+    } else {
+      synth.cancel();
+    }
+    setInterval(() => {
+      if (!synth.speaking) {
+        setIsSpeaking("");
+      }
+    }, 100);
+  };
+
   return (
     <div className="dicoWrapper">
       <h1>POCKET DICTIONARY</h1>
       <form>
-        <textarea name="" id="" cols="30" rows="6" placeholder="Enter Text" />
+        <textarea
+          value={text}
+          cols="30"
+          rows="6"
+          placeholder="Enter Text"
+          onChange={(e) => setText(e.target.value)}
+        />
         <div className="voice-div">
           <div className="voice-select">
             <select
@@ -28,9 +58,15 @@ const Dico = () => {
             </select>
           </div>
           {/* <BiVolumeFull /> */}
-          <div className="icon-Volume">
-            <FiVolume2 opacity="0.5" cursor="pointer" fontSize="1rem" />
-          </div>
+          {/* <div className="icon-Volume"> */}
+          <FiVolume2
+            className={`icon-Volume  ${isSpeaking}`}
+            opacity="0.5"
+            cursor="pointer"
+            fontSize="1rem"
+            onClick={handleSpeech}
+          />
+          {/* </div> */}
         </div>
       </form>
       <div className="text-container">

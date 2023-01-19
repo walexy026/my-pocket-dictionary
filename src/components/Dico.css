@@ -57,6 +57,10 @@ form .voice-div {
   margin-left: 10px;
   opacity: 0.5;
   padding-top: 1px;
+  color: black;
+}
+.icon-Volume.speak {
+  color: red;
 }
 .voice-select {
   flex: 1;
