@@ -29,23 +29,28 @@ const Dico = () => {
   //     dictionaryUrl(text);
   //   },
   //   [text]);
-  useEffect(() => {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/hello`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `This is an HTTP error: The status is ${response.status}`
-          );
-        }
-        return response.json();
-      })
-      .then((actualData) => console.log(actualData))
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  useEffect(
+    (text) => {
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${text}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `This is an HTTP error: The status is ${response.status}`
+            );
+          }
+          return response.json();
+        })
+        .then((actualData) => console.log(actualData))
+        .catch((err) => {
+          console.log(err.message);
+        });
+    },
+    [text]
+  );
   const startSpeech = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find((voice) => voice.name === voiceSelected);
+    utterance.voice = voice;
     synth.speak(utterance);
   };
 
