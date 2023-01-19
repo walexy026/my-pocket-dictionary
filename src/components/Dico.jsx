@@ -8,18 +8,18 @@ const dico = () => {
       <h1>POCKET DICTIONARY</h1>
       <form>
         <textarea name="" id="" cols="30" rows="6" placeholder="Enter Text" />
-      </form>
-      <div className="voice-icons">
-        <div className="voice-select">
-          <select name="" id="">
-            <option value="">English</option>
-            <option value="">English</option>
-            <option value="">English</option>
-          </select>
+        <div className="voice-div">
+          <div className="voice-select">
+            <select name="" id="">
+              <option value="">English</option>
+              <option value="">English</option>
+              <option value="">English</option>
+            </select>
+          </div>
+          {/* <BiVolumeFull /> */}
+          <FiVolume2 opacity="0.5" cursor="pointer" />
         </div>
-        {/* <BiVolumeFull /> */}
-        <FiVolume2 />
-      </div>
+      </form>
       <div className="text">
         <h2>Meaning</h2>
         <p className="phonetics">/wɛt/ /wɛt/</p>
