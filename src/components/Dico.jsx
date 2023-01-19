@@ -1,9 +1,25 @@
 import React from "react";
 import "./Dico.css";
+// import BiVolumeFull from " react-icons/bi";
+import { FiVolume2 } from "react-icons/fi";
 const dico = () => {
   return (
-    <div>
-      <textarea name="" id="" cols="30" rows="10" placeholder=""></textarea>
+    <div className="dicoWrapper">
+      <h1>POCKET DICTIONARY</h1>
+      <form>
+        <textarea name="" id="" cols="30" rows="6" placeholder="Enter Text" />
+      </form>
+      <div className="voice-icons">
+        <div className="voice-select">
+          <select name="" id="">
+            <option value="">English</option>
+            <option value="">English</option>
+            <option value="">English</option>
+          </select>
+        </div>
+        {/* <BiVolumeFull /> */}
+        <FiVolume2 />
+      </div>
       <div className="text">
         <h2>Meaning</h2>
         <p className="phonetics">/wɛt/ /wɛt/</p>
