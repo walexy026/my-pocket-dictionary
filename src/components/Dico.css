@@ -70,9 +70,40 @@ form textarea form,
   overflow: scroll;
   font-size: 15px;
 }
-
-.meaning {
+.phonetics {
+  opacity: 0.5;
+}
+.meaning,
+.patOfSpeech,
+.synonyms,
+.antonyms {
   border-left: 5px solid blue !important;
   padding-left: 5px;
-  border: 3px solid rgb(243, 239, 239);
+  border: 3px solid #eee;
+  margin-bottom: 1rem;
+}
+span > h5 {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+span > p {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  opacity: 0.5;
+}
+/* .synonyms span {
+  cursor: pointer;
+  border-bottom: 1px dotted red;
+  opacity: 0.5;
+} */
+.synonyms span,
+.antonyms span {
+  cursor: pointer;
+  border-bottom: 1px dotted red;
+  opacity: 0.7;
+  text-transform: capitalize;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
