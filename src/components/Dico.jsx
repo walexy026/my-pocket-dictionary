@@ -30,7 +30,7 @@ const Dico = () => {
   //   },
   //   [text]);
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`)
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/hello`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(
