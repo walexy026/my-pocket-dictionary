@@ -2,7 +2,10 @@ import React from "react";
 import "./Dico.css";
 // import BiVolumeFull from " react-icons/bi";
 import { FiVolume2 } from "react-icons/fi";
+
+const synth = window.speechSynthesis;
 const dico = () => {
+  console.log(synth.getVoices());
   return (
     <div className="dicoWrapper">
       <h1>POCKET DICTIONARY</h1>
