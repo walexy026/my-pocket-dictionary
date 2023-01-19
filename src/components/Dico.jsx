@@ -1,18 +1,49 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "./Dico.css";
+import DicoFindings from "./DicoFindings";
 // import BiVolumeFull from " react-icons/bi";
 import { FiVolume2 } from "react-icons/fi";
 
 const synth = window.speechSynthesis;
 const Dico = () => {
   // console.log(synth.getVoices());
+  // console.log("first");
 
   const voices = useMemo(() => synth.getVoices(), []);
   const [voiceSelected, setVoiceSelected] = useState("Google UK English Male");
   const [text, setText] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(" ");
 
-  // const handleIcon = () => {};
+  // const dictionaryUrl = (text) => {
+  //   let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${text}`;
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //     });
+  // };
+
+  // useEffect =
+  //   (() => {
+  //     if (!text.trim()) return;
+  //     dictionaryUrl(text);
+  //   },
+  //   [text]);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        return response.json();
+      })
+      .then((actualData) => console.log(actualData))
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
   const startSpeech = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
     synth.speak(utterance);
@@ -69,46 +100,7 @@ const Dico = () => {
           {/* </div> */}
         </div>
       </form>
-      <div className="text-container">
-        <div className="text">
-          <h2>Meaning</h2>
-          <p className="phonetics">/wɛt/ /wɛt/</p>
-        </div>
-        <div className="meaning">
-          <span>
-            <h5>meaning</h5>
-            <p>- A happy event, thing, person, etc.</p>
-          </span>
-        </div>
-        <div className="patOfSpeech">
-          <span>
-            <h5>noun</h5>
-            <p>
-              - Having a feeling arising from a consciousness of well-being or
-              of enjoyment; enjoying good of any kind, such as comfort, peace,
-              or tranquillity; blissful, contented, joyous.
-            </p>
-          </span>
-        </div>
-        <div className="synonyms">
-          <span>
-            <h5>synonyms</h5>
-            <span>
-              cheerful, content, delighted, elated, exultant, glad, joyful,
-              jubilant, merry, orgasmic, fortunate, lucky, propitious,
-            </span>
-          </span>
-        </div>
-        <div className="antonyms">
-          <span>
-            <h5>antonyms</h5>
-            <span>
-              Cheerful, content, delighted, elated, exultant, glad, joyful,
-              jubilant, merry, orgasmic, fortunate, lucky, propitious,
-            </span>
-          </span>
-        </div>
-      </div>
+      <DicoFindings />
     </div>
   );
 };
