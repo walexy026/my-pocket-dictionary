@@ -13,6 +13,10 @@ const Dico = () => {
   const [voiceSelected, setVoiceSelected] = useState("Google UK English Male");
   const [text, setText] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(" ");
+  const [meanings, setMeanings] = useState([]);
+  const [phonetics, setPhonetics] = useState([]);
+  const [word, setWord] = useState("");
+  const [error, setError] = useState("");
 
   // const dictionaryUrl = (text) => {
   //   let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${text}`;
@@ -29,24 +33,28 @@ const Dico = () => {
   //     dictionaryUrl(text);
   //   },
   //   [text]);
-  useEffect(
-    (text) => {
-      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${text}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              `This is an HTTP error: The status is ${response.status}`
-            );
-          }
-          return response.json();
-        })
-        .then((actualData) => console.log(actualData))
-        .catch((err) => {
-          console.log(err.message);
-        });
-    },
-    [text]
-  );
+
+  useEffect(() => {
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/happy`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        return response.json();
+      })
+      .then(
+        (actualData) => console.log(actualData),
+        setMeanings(actualData[0].meanings),
+        setPhonetics(actualData[0].phonetics),
+        setWord(actualData[0].word),
+        setError("")
+      )
+      .catch((err) => {
+        setError.err;
+      });
+  }, []);
   const startSpeech = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = voices.find((voice) => voice.name === voiceSelected);
@@ -72,6 +80,7 @@ const Dico = () => {
   return (
     <div className="dicoWrapper">
       <h1>POCKET DICTIONARY</h1>
+
       <form>
         <textarea
           value={text}
@@ -104,8 +113,14 @@ const Dico = () => {
           />
           {/* </div> */}
         </div>
+        {/* {actualData.word} */}
       </form>
-      <DicoFindings />
+      <DicoFindings
+        meanings={meanings}
+        phonetics={phonetics}
+        word={word}
+        setText={setText}
+      />
     </div>
   );
 };

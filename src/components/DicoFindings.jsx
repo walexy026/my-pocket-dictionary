@@ -1,13 +1,17 @@
 import React from "react";
 import "./Dico.css";
 
-const DicoFindings = () => {
+const DicoFindings = ({ meanings, phonetics, word, setText }) => {
   return (
     <div>
       <div className="text-container">
         <div className="text">
-          <h2>Meaning</h2>
-          <p className="phonetics">/wɛt/ /wɛt/</p>
+          <h2>{word}</h2>
+          {phonetics.map((phonetic, index) => {
+            <p className="phonetics" key={index}>
+              {phonetic.text}/wɛt/ /wɛt/
+            </p>;
+          })}
         </div>
         <div className="meaning">
           <span>
