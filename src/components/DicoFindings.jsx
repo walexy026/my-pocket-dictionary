@@ -1,7 +1,11 @@
 import React from "react";
 import "./Dico.css";
 
-const DicoFindings = ({ meanings, phonetics, word, setText }) => {
+const DicoFindings = (
+  {
+    //  meanings, phonetics, word, setText
+  }
+) => {
   return (
     <div>
       <div className="text-container">

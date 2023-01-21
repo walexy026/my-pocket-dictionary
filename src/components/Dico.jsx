@@ -5,7 +5,7 @@ import DicoFindings from "./DicoFindings";
 import { FiVolume2 } from "react-icons/fi";
 
 const synth = window.speechSynthesis;
-const Dico = () => {
+const Dico = ({ meanings, phonetics, word, setText }) => {
   // console.log(synth.getVoices());
   // console.log("first");
 
